@@ -1,5 +1,6 @@
 import "./App.css";
 import styled from "styled-components";
+import { NewLetter } from "./components/NewLetter";
 
 // Create a Title component that'll render an <h1> tag with some styles
 const Title = styled.h1`
@@ -18,7 +19,7 @@ function App() {
   return (
     <>
       <Wrapper>
-        <Title>Hello, World! </Title>
+        <Title>Penny Post </Title>
       </Wrapper>
       <NewLetter />
     </>
