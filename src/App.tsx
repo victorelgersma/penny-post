@@ -16,9 +16,12 @@ const Wrapper = styled.section`
 
 function App() {
   return (
-    <Wrapper>
-      <Title>Hello, World! </Title>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Title>Hello, World! </Title>
+      </Wrapper>
+      <NewLetter />
+    </>
   );
 }
 
