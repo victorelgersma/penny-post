@@ -29,3 +29,7 @@ Component Tree
 
 - [ ] When the letter is posted, I should get a modal that says "Letter has been posted, your recipient should receive it in 24 hours"
 - [ ] dark mode
+
+## Deployment
+
+Currently deployed with netlify at [this url](https://6680270fcd6edb155028689a--peaceful-madeleine-47ec57.netlify.app/)
