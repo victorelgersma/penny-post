@@ -1,6 +1,6 @@
-
 'use client'; // Ensures the component runs on the client side
 
+import Navbar from '../components/Navbar';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -27,13 +27,15 @@ export default function LoginPage() {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-semibold mb-6 text-center">Login</h1>
+        <h1 className="text-2xl text-foreground font-semibold mb-6 text-center">Login</h1>
         Try logging in with user@example.com and password123
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+            <label htmlFor="email" className="block text-sm text-foreground font-medium text-black">Email</label>
             <input
               type="email"
               id="email"
@@ -69,6 +71,7 @@ export default function LoginPage() {
         </form>
       </div>
     </div>
+   </>
   );
 }
 

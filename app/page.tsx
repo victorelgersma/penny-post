@@ -16,6 +16,9 @@ export default function HomePage() {
             <Link href="/login" className="text-white hover:text-gray-300">
               Login
             </Link>
+            <Link href="/register" className="text-white hover:text-gray-300">
+            Register
+            </Link>
           </div>
         </div>
       </nav>
