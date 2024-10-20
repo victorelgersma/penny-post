@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import PocketBase from 'pocketbase';
 
+
 export async function POST(req: Request) {
   const pb = new PocketBase(process.env.POCKETBASE_URL);
   const { email, password } = await req.json();

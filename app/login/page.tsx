@@ -14,17 +14,30 @@ export default function LoginPage() {
   const validEmail = 'user@example.com';
   const validPassword = 'password123';
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null); // Reset error before trying login
 
-    // Simple check to simulate login
-    if (email === validEmail && password === validPassword) {
-      router.push('/dashboard'); // Redirect to dashboard if login is successful
-    } else {
-      setError('Invalid credentials');
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers:  {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({email, password})
+      });
+
+      if (res.ok) {
+        router.push('/dashboard'); // Redirect to dashboard on successful login
+      } else {
+        const errorData = await res.json();
+        setError(errorData.error || 'Login failed')
+      }
+    } catch (err) {
+      setError('Something went wrong. Please try again. ');
     }
   };
+  
 
   return (
     <>
