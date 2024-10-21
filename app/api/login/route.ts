@@ -4,6 +4,8 @@ import PocketBase from 'pocketbase';
 
 const pb = new PocketBase(process.env.POCKETBASE_URL);
 
+// TODO - store in local storage
+
 export async function POST(req: Request) {
     const { email, password } = await req.json();
   

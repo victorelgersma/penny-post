@@ -4,15 +4,17 @@ import Navbar from '../components/Navbar';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function LoginPage() {
-  const router = useRouter();
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [error, setError] = useState<string | null>(null);
 
   // Simulating login credentials
   const validEmail = 'test@example.com';
   const validPassword = '123456789';
+
+export default function LoginPage() {
+  const router = useRouter();
+  const [email, setEmail] = useState<string>(validEmail);
+  const [password, setPassword] = useState<string>(validPassword);
+  const [error, setError] = useState<string | null>(null);
+
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

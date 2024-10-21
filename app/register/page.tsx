@@ -1,146 +1,119 @@
-"use client";
+'use client';
 
-import Navbar from "../components/Navbar";
-import { useState } from "react";
-import Link from "next/link";
+import Navbar from '../components/Navbar';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
-
 
 export default function RegisterPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState<string>('')
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [passwordConfirm, setPasswordConfirm] = useState<string>(''); // New state for password confirmation
+  const [name, setName] = useState<string>('');
+  const [error, setError] = useState<string | null>(null);
 
-  const handleRegister = async (e: React.FormEvent) => {
+  const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
-
-    // Basic validation
-    if (!email || !password || !confirmPassword) {
-      setError("All fields are required");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
+    setError(null); // Reset error before trying registration
 
     try {
-      // Make a request to the App Router API route
-      const res = await fetch("/api/register", {
-        method: "POST",
+      const res = await fetch('/api/register', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, passwordConfirm, name }),
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message || "Something went wrong");
+      if (res.ok) {
+        // Redirect to login page after successful registration
+        router.push('/login');
+      } else {
+        const errorData = await res.json();
+        setError(errorData.error || 'Registration failed');
       }
-
-      setSuccess("Registration successful! You can now log in.");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-    } catch (err: any) {
-      setError(err.message || "Error registering user");
+    } catch (err) {
+      console.error(err)
+      setError('Something went wrong. Please try again.');
     }
   };
 
+  const handleInputChange = (setter: React.Dispatch<React.SetStateAction<string>>) => (
+    e: ChangeEvent<HTMLInputElement>
+  ) => {
+    setter(e.target.value);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100">
-      {/* Navbar */}
+    <>
       <Navbar />
-
-      {/* Registration Form */}
-      <div className="flex items-center justify-center min-h-[calc(100vh-64px)]">
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-          <h1 className="text-3xl font-semibold text-zinc-600 mb-6 text-center">
-            Register
-          </h1>
+          <h1 className="text-2xl text-foreground font-semibold mb-6 text-center">Register</h1>
+          <form onSubmit={handleRegister} className="space-y-6">
+            <div>
+              <label htmlFor="name" className="block text-sm text-foreground font-medium text-black">Name</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Name"
+                value={name}
+                onChange={handleInputChange(setName)}
+                required
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+            </div>
 
-          {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-          {success && (
-            <p className="text-green-500 text-center mb-4">{success}</p>
-          )}
-
-          <form onSubmit={handleRegister}>
-            <div className="mb-4">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Email
-              </label>
+            <div>
+              <label htmlFor="email" className="block text-sm text-foreground font-medium text-black">Email</label>
               <input
                 type="email"
                 id="email"
+                placeholder="Email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                onChange={handleInputChange(setEmail)}
                 required
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
 
-            <div className="mb-4">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Password
-              </label>
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
               <input
                 type="password"
                 id="password"
+                placeholder="Password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                onChange={handleInputChange(setPassword)}
                 required
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
 
-            <div className="mb-4">
-              <label
-                htmlFor="confirmPassword"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Confirm Password
-              </label>
+            <div>
+              <label htmlFor="passwordConfirm" className="block text-sm font-medium text-gray-700">Confirm Password</label>
               <input
                 type="password"
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                id="passwordConfirm"
+                placeholder="Confirm Password"
+                value={passwordConfirm}
+                onChange={handleInputChange(setPasswordConfirm)} // Update password confirmation field
                 required
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Register
             </button>
-          </form>
 
-          <p className="mt-4 text-zinc-500 text-center">
-            Already have an account?{" "}
-            <Link href="/login" className="text-indigo-600 hover:underline">
-              Log in here
-            </Link>
-          </p>
+            {error && <p className="text-red-500 text-sm mt-4 text-center">{error}</p>}
+          </form>
         </div>
       </div>
-    </div>
+    </>
   );
 }
