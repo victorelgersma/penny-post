@@ -11,8 +11,8 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
 
   // Simulating login credentials
-  const validEmail = 'user@example.com';
-  const validPassword = 'password123';
+  const validEmail = 'test@example.com';
+  const validPassword = '123456789';
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,7 +45,7 @@ export default function LoginPage() {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 className="text-2xl text-foreground font-semibold mb-6 text-center">Login</h1>
-        Try logging in with user@example.com and password123
+        Try logging in with {validEmail} and {validPassword}
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm text-foreground font-medium text-black">Email</label>
