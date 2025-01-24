@@ -8,18 +8,6 @@ const { title } = Astro.locals;
 ---
 
 <Layout>
-  <button> Login</button>
   <h1>{title}</h1>
   <Welcome />
 </Layout>
-
-<script>
-  const btn = document
-    .querySelector("button")
-    ?.addEventListener("click", async () => {
-      const res = await fetch("/api/login", {
-        method: "POST",
-      });
-      const data = await res.json();
-    });
-</script>
