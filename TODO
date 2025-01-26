@@ -1,0 +1,3 @@
+## Spikes
+
+- [ ] jsonwebtoken is (one of) the reasons I can't use SSR on netlify. Do I remove it? Is the issue with my config? The auth example Im following is using vercel.

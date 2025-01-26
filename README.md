@@ -1,5 +1,7 @@
 # Astro Starter Kit: Basics
 
+github repo: https://github.com/victorelgersma/penny-post
+
 ```sh
 npm create astro@latest -- --template basics
 ```
