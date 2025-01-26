@@ -6,5 +6,8 @@ import netlify from "@astrojs/netlify";
 export default defineConfig({
   site: "https://lambent-jalebi-200841.netlify.app/",
   output: "server",
-  adapter: netlify(),
+  adapter: netlify({
+    edgeMiddleware: true,
+  }),
+  server: { port: 4323 },
 });
