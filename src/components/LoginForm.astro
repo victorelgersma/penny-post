@@ -11,4 +11,66 @@
   </div>
   <br />
   <button type="submit">Submit</button>
+  <p>test username: user@example.com</p>
+  <p>test password: 1234</p>
 </form>
+
+<style>
+  /* Basic reset for margins and padding */
+  body,
+  form,
+  div,
+  label,
+  input,
+  button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Center the form on the page */
+  form {
+    max-width: 320px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: var(--color-form);
+  }
+
+  /* Style for labels */
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  /* Style for input fields */
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  /* Style for the submit button */
+  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--color-form-button);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  /* Hover effect for the submit button */
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+</style>

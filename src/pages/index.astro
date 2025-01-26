@@ -1,6 +1,7 @@
 ---
 import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
+import LogoutButton from "../components/LogoutButton.astro";
 const { title } = Astro.locals;
 
 const profile = Astro.locals.profile;
@@ -15,7 +16,7 @@ if (profile.success === false) {
 
 <Layout>
   <h1>Welcome, {profile.username}</h1>
-  <h1>Penny post (pre-alpha)</h1>
+  <LogoutButton />
 </Layout>
 
 <script>
