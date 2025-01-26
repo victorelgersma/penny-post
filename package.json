@@ -11,7 +11,7 @@
   "dependencies": {
     "@astrojs/netlify": "^6.1.0",
     "astro": "^5.1.9",
-    "pocketbase": "^0.25.1",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "pocketbase": "^0.25.1"
   }
 }
