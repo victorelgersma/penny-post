@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import LoginForm from "../components/LoginForm.astro";
 
-if (Astro.locals.profile.success === true) {
+if (Astro.locals.isLoggedIn === true) {
   return Astro.redirect("/");
 }
 

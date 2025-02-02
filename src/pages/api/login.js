@@ -1,9 +1,7 @@
 import PocketBase from "pocketbase";
 
-const pb = new PocketBase("https://be-proud-thunder-3266.fly.dev");
-//elger@gmail.com
-//Bemetr7#12
-// good credentials
+const pb = new PocketBase(import.meta.env.POCKETBASE_URL);
+
 export const POST = async ({ request, cookies, redirect }) => {
   const formData = await request.formData();
   const email = formData.get("email");
