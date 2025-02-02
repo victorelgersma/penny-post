@@ -6,12 +6,12 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="style.css" class="rel" />
     <meta name="generator" content={Astro.generator} />
-    <title>Pocketbase</title>
+    <title>Penny Post</title>
   </head>
   <body>
     <nav>
-      <h1>Penny Post</h1>
-      <h3>pre-alpha</h3>
+      <a href="/">Penny Post</a>
+      <a href="/login">Login</a>
     </nav>
     <div class="main-wrapper">
       <slot />
@@ -39,6 +39,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1em;
+  }
+  nav a {
+    color: var(--color-4);
+    padding: 0.5em;
+  }
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--color-4);
+    background-color: var(--color-5);
   }
   h1,
   h3 {

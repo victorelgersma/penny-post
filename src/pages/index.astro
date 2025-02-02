@@ -1,32 +1,10 @@
 ---
 import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
-import LogoutButton from "../components/LogoutButton.astro";
 const { title } = Astro.locals;
-
-const profile = Astro.locals.profile;
-
-if (profile.success === false) {
-  return Astro.redirect("/login");
-}
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-  <h1>Welcome, {profile.username}</h1>
-  <LogoutButton />
-</Layout>
-
-<script>
-  const btn = document
-    .querySelector("button")
-    ?.addEventListener("click", async () => {
-      const res = await fetch("/api/login", {
-        method: "POST",
-      });
-      const data = await res.json();
-      console.log(data);
-    });
-</script>
+<Layout> Home </Layout>
