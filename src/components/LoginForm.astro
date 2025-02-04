@@ -1,4 +1,4 @@
-<form action="/api/login" accept-charset="UTF-8" method="POST">
+<form id="loginForm">
   <div>
     <label for="email">Email:</label>
     <br />
@@ -11,7 +11,54 @@
   </div>
   <br />
   <button type="submit">Submit</button>
+  <div id="errorMessage" style="color: red; display: none;"></div>
 </form>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOM fully loaded and parsed");
+    document
+      .getElementById("loginForm")
+      .addEventListener("submit", async function (event) {
+        console.log("Form submit event triggered");
+        event.preventDefault();
+
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        const errorMessage = document.getElementById("errorMessage");
+
+        try {
+          console.log("Trying to log in with email:", email);
+          const response = await fetch(
+            "https://be-proud-thunder-3266.fly.dev/api/collections/users/auth-with-password",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ identity: email, password: password }),
+            }
+          );
+
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Login failed");
+          }
+
+          const data = await response.json();
+          console.log("Login successful:", data);
+          // Handle successful login (e.g., redirect to another page, store token, etc.)
+          errorMessage.style.display = "none";
+          window.location.href = "/";
+        } catch (error) {
+          console.error("Error:", error);
+          errorMessage.textContent = error.message;
+          errorMessage.style.display = "block";
+          // Handle login error (e.g., show error message to user)
+        }
+      });
+  });
+</script>
 
 <style>
   /* Basic reset for margins and padding */
